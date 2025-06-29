@@ -35,55 +35,24 @@ Steps
        - Excel files with model scores
        - Feature selection results
 
+4. Finalize Best Model: `4_model_justLASSO_XGB.py`
+     - Open the model scores file and identify the model with the highest Test ROC AUC.
+     - Edit `4_model_justLASSO_XGB.py` to use the best:
+       - Feature selection method (e.g., LASSO)
+       - Classifier (e.g., XGB)
+       - Replace any references to `lasso_features` or `lasso_best_xgb_model` with your selected method/model.
+     - Update `file_path`, `file_name`, and `feat_to_names` (for PDP plots).
+     - This script will:
+       - Retrain the best model
+       - Perform threshold tuning
+       - Compare against a binary classifier
+       - Run SHAP and PDP analyses
+
+5. Average Binary Model Performance: `5_binary_model_averaging.py`
+     - Edit the `seeds` and `split_ratios` if needed.
+     - Update `file_path`, `file_name`, and `sheet_name`.
+     - Run the script to evaluate the binary model across multiple splits/seeds.
+     - Output: binaryPerformance_results.xlsx
 
 
-## 🏆 Step 4: Finalize Best Model
 
-**Script**: `4_model_justLASSO_XGB.py`
-
-1. Open the model scores file and identify the model with the **highest Test ROC AUC**.
-2. Edit `4_model_justLASSO_XGB.py` to use the best:
-   - **Feature selection method** (e.g., LASSO)
-   - **Classifier** (e.g., XGB)
-3. Replace any references to `lasso_features` or `lasso_best_xgb_model` with your selected method/model.
-4. Update `file_path`, `file_name`, and `feat_to_names` (for PDP plots).
-5. This script will:
-   - Retrain the best model
-   - Perform **threshold tuning**
-   - Compare against a **binary classifier**
-   - Run **SHAP** and **PDP** analyses
-
----
-
-## ⚖️ Step 5 (Optional): Average Binary Model Performance
-
-**Script**: `5_binary_model_averaging.py`
-
-1. Edit the `seeds` and `split_ratios` if needed.
-2. Update `file_path`, `file_name`, and `sheet_name`.
-3. Run the script to evaluate the **binary model** across multiple splits/seeds.
-4. Output:
-   ```
-   binaryPerformance_results.xlsx
-   ```
-
----
-
-## 📁 Directory Structure (Suggested)
-
-```
-├── data/
-│   └── raw_dataset.xlsx
-├── notebooks/
-├── scripts/
-│   ├── 1_data_cleaning_and_num_imput.py
-│   ├── 2_cat_imputing.py
-│   ├── 3_models_full.py
-│   ├── 4_model_justLASSO_XGB.py
-│   └── 5_binary_model_averaging.py
-├── outputs/
-│   └── cleaned_data_with_imputation_papers.xlsx
-│   └── model_scores.xlsx
-│   └── binaryPerformance_results.xlsx
-├── requirements.txt
-└── README.md
